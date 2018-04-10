@@ -10,16 +10,40 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet private weak var counterLabel: UILabel!
+    private var counter: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        counter = 0
+        updateCounterLabel()
+    }
+    
+    private func updateCounterLabel() {
+        let formatter = createNumberFormatter()
+        let formattedNumber = formatter.string(from: counter as NSNumber)
+        
+        counterLabel.text = formattedNumber
+    }
+    
+    private func createNumberFormatter() -> NumberFormatter {
+        let formatter = NumberFormatter()
+        
+        formatter.numberStyle = .none
+        
+        return formatter
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction private func tapButtonTouchUpInside(_ sender: UIButton) {
+        counter += 1
+        updateCounterLabel()
     }
-
-
+    
+    @IBAction private func resetButtonAction(_ sender: UIBarButtonItem) {
+        counter = 0
+        updateCounterLabel()
+    }
+    
 }
 
