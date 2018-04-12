@@ -36,8 +36,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func tapButtonTouchUpInside(_ sender: UIButton) {
-        counter += 1
-        updateCounterLabel()
+        incrementCounter()
     }
     
     @IBAction private func resetButtonAction(_ sender: UIBarButtonItem) {
@@ -45,5 +44,18 @@ class ViewController: UIViewController {
         updateCounterLabel()
     }
     
+    @IBAction func longPressButtonAction(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began, .changed:
+            incrementCounter()
+        default:
+            break
+        }
+    }
+    
+    private func incrementCounter() {
+        counter += 1
+        updateCounterLabel()
+    }
 }
 
